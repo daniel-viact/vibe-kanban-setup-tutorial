@@ -1,0 +1,30 @@
+services:
+  desktop-client:
+    container_name: viact-vibe-kanban-desktop
+    image: thanhlcm90/vibe-kanban:0.1.24
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "5173:5173"
+      - "5174:5174"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - BROWSER=none
+      - VK_SHARED_API_BASE=https://api-vg01-kanban-01.viact.ai/
+      - ELECTRIC_SERVICE=https://api-vg01-kanban-01.viact.ai/electric
+      - RUST_LOG=info
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    working_dir: /home/node/workspaces
+    volumes:
+      - ./workspace:/home/node/workspaces:rw
+      - claude_session:/home/node/.claude
+      - vibe_config:/home/node/.vibe-kanban
+      - vibe_profiles:/home/node/.local/share/vibe-kanban:rw
+      - vibe_tmp_data:/var/tmp/vibe-kanban:rw
+
+volumes:
+  claude_session:
+  vibe_config:
+  vibe_profiles:
+  vibe_tmp_data:
