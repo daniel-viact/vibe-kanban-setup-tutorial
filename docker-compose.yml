@@ -17,14 +17,11 @@ services:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
     working_dir: /home/node/workspaces
     volumes:
-      - ./workspace:/home/node/workspaces:rw
-      - claude_session:/home/node/.claude
-      - vibe_config:/home/node/.vibe-kanban
-      - vibe_profiles:/home/node/.local/share/vibe-kanban:rw
+      - vibe_node_home:/home/node:rw
       - vibe_tmp_data:/var/tmp/vibe-kanban:rw
 
 volumes:
   claude_session:
   vibe_config:
-  vibe_profiles:
+  vibe_node_home:
   vibe_tmp_data:
