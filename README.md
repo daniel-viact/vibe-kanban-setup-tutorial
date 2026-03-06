@@ -1,181 +1,179 @@
-# Vibe Kanban - Setup Guide
+# Vibe Kanban
 
-This guide will walk you through running **Vibe Kanban** on your personal computer using Docker. No programming experience is needed — just follow the steps below.
+**AI-powered Kanban board by Viact Team**
 
----
-
-## What You Will Need
-
-Before you start, make sure you have the following installed on your computer:
-
-1. **Docker Desktop** — This is the tool that runs Vibe Kanban in a container (a lightweight virtual environment).
-2. **A GitHub account** — You will need a GitHub Personal Access Token to connect Vibe Kanban to your repositories.
+Run Vibe Kanban on your personal computer with a single command. No programming experience needed.
 
 ---
 
-## Step 1: Install Docker Desktop
+## Quick Start (1-Click Install)
 
-If you don't have Docker installed yet:
+### macOS / Linux
 
-1. Go to the Docker Desktop download page: <https://www.docker.com/products/docker-desktop/>
-2. Download the version for your operating system (Windows, Mac, or Linux).
-3. Run the installer and follow the on-screen instructions.
-4. After installation, **open Docker Desktop** and make sure it is running. You should see the Docker icon in your system tray (Windows) or menu bar (Mac).
+Open **Terminal** and paste this command:
 
-> **Tip:** On Windows, Docker may ask you to enable WSL 2 (Windows Subsystem for Linux). Follow the prompts to enable it — this is required for Docker to work.
-
----
-
-## Step 2: Create a GitHub Personal Access Token
-
-Vibe Kanban needs a GitHub token to interact with your repositories. Here's how to create one:
-
-1. Go to GitHub and sign in to your account.
-2. Follow this official guide to create a **Personal Access Token (classic)**: \
-   <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic>
-3. When selecting scopes (permissions), make sure to check **`repo`** (Full control of private repositories).
-4. Click **Generate token**.
-5. **Copy the token immediately** — you will not be able to see it again after you leave the page.
-
-> **Important:** Keep your token safe and private. Do not share it with anyone.
-
----
-
-## Step 3: Download the Project Files
-
-Download or copy the following files into a new folder on your computer (for example, a folder called `vibe-kanban`):
-
-Your folder should look like this:
-
-```
-vibe-kanban/
-  docker-compose.yml
-  .env
+```bash
+curl -fsSL https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.sh | bash
 ```
 
-You can get these files by downloading this repository, or by creating them manually as described below.
+### Windows
 
----
+Open **PowerShell** and paste this command:
 
-## Step 4: Set Up Your Environment File
-
-The `.env` file is where you store your GitHub token. Vibe Kanban reads this file automatically when it starts.
-
-1. In your `vibe-kanban` folder, find the file called `.env.example`.
-2. **Make a copy** of this file and rename the copy to `.env` (remove the `.example` part).
-   - On **Windows**: Right-click the file > Copy > Paste > Rename to `.env`
-   - On **Mac/Linux**: Open a terminal in the folder and run:
-     ```
-     cp .env.example .env
-     ```
-3. Open the `.env` file with any text editor (Notepad, TextEdit, VS Code, etc.).
-4. Replace `your_github_token_here` with the token you copied in Step 2.
-
-Your `.env` file should look like this:
-
-```
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```powershell
+irm https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.ps1 | iex
 ```
 
-(where `ghp_xxxx...` is your actual token)
+> **That's it!** The installer will guide you through everything step by step.
 
 ---
 
-## Step 5: Start Vibe Kanban
+## What the Installer Does
 
-Now you are ready to start Vibe Kanban.
+The installer takes care of everything automatically:
 
-1. Open a terminal (command prompt) in your `vibe-kanban` folder:
-   - **Windows**: Open the folder in File Explorer, click on the address bar, type `cmd`, and press Enter.
-   - **Mac**: Open Finder, navigate to the folder, then right-click and select "Open Terminal Here" (or use Spotlight to open Terminal and `cd` to the folder).
-   - **Linux**: Right-click in the folder and select "Open Terminal".
-2. Run the following command:
-   ```
-   docker compose up -d
-   ```
-3. Wait for Docker to download the image and start the container. This may take a few minutes the first time.
-4. Once you see the container is running, open your web browser and go to:
-   ```
-   http://localhost:3000
-   ```
-
-You should see the Vibe Kanban application.
-
-> **Note:** The first time you run this command, Docker will download the Vibe Kanban image from the internet. This only happens once — future starts will be much faster.
+1. **Checks Docker** — Verifies Docker is installed and running. If not, it shows you how to install it.
+2. **Asks for your GitHub Token** — Guides you to create one and securely saves it.
+3. **Downloads and starts Vibe Kanban** — Sets up all necessary files and starts the application.
+4. **Helps you log in to Claude Code** — Opens the Claude login directly inside the container.
+5. **Shows you the link** — Once ready, just open **http://localhost:3000** in your browser.
 
 ---
 
-## Step 6: Log In to Claude
+## Before You Begin
 
-Vibe Kanban uses Claude as an AI assistant. You need to log in to Claude from inside the running container.
+You will need two things. The installer will check for these and help you set them up:
 
-1. Open a terminal (the same one or a new one).
-2. Run the following command:
-   ```
-   docker exec -it viact-vibe-kanban-desktop gosu node claude
-   ```
-3. Follow the on-screen instructions to complete the Claude login.
+### 1. Docker Desktop
 
-> **Tip:** You only need to do this once. Your login session will be saved automatically.
+Docker is the tool that runs Vibe Kanban on your computer.
+
+| Platform | Download Link |
+|----------|---------------|
+| Windows  | [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/) |
+| macOS    | [Docker Desktop for Mac](https://docs.docker.com/desktop/install/mac-install/) |
+| Linux    | [Docker Engine for Linux](https://docs.docker.com/engine/install/) |
+
+> **Windows users:** Docker may ask you to enable WSL 2 during installation. Follow the prompts — this is required.
+
+### 2. GitHub Personal Access Token
+
+Vibe Kanban needs a GitHub token to work with your repositories.
+
+1. Go to **[github.com/settings/tokens/new](https://github.com/settings/tokens/new)**
+2. Give your token a name (e.g., "Vibe Kanban")
+3. Select the **`repo`** scope (Full control of private repositories)
+4. Click **Generate token**
+5. **Copy the token immediately** — you won't be able to see it again
+
+> The installer will ask you to paste this token during setup.
 
 ---
 
-## Stopping Vibe Kanban
+## Managing Vibe Kanban
 
-When you want to stop Vibe Kanban:
+After installation, you can manage Vibe Kanban with these commands:
 
-1. Open a terminal in your `vibe-kanban` folder.
-2. Run:
-   ```
-   docker compose down
-   ```
+### Stop
 
-This will stop the application. Your data is saved and will be available the next time you start it.
+<table>
+<tr><td><strong>macOS / Linux</strong></td></tr>
+<tr><td>
 
----
+```bash
+curl -fsSL https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.sh | bash -s -- --stop
+```
 
-## Starting Vibe Kanban Again
+</td></tr>
+<tr><td><strong>Windows (PowerShell)</strong></td></tr>
+<tr><td>
 
-To start Vibe Kanban again after stopping it:
+```powershell
+$env:VK_ACTION="stop"; irm https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.ps1 | iex
+```
 
-1. Open a terminal in your `vibe-kanban` folder.
-2. Run:
-   ```
-   docker compose up -d
-   ```
-3. Open your browser and go to `http://localhost:3000`.
+</td></tr>
+</table>
+
+### Restart
+
+<table>
+<tr><td><strong>macOS / Linux</strong></td></tr>
+<tr><td>
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.sh | bash -s -- --restart
+```
+
+</td></tr>
+<tr><td><strong>Windows (PowerShell)</strong></td></tr>
+<tr><td>
+
+```powershell
+$env:VK_ACTION="restart"; irm https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.ps1 | iex
+```
+
+</td></tr>
+</table>
+
+### Uninstall
+
+This will stop Vibe Kanban and remove all related Docker data.
+
+<table>
+<tr><td><strong>macOS / Linux</strong></td></tr>
+<tr><td>
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.sh | bash -s -- --uninstall
+```
+
+</td></tr>
+<tr><td><strong>Windows (PowerShell)</strong></td></tr>
+<tr><td>
+
+```powershell
+$env:VK_ACTION="uninstall"; irm https://raw.githubusercontent.com/daniel-viact/vibe-kanban-setup-tutorial/main/install.ps1 | iex
+```
+
+</td></tr>
+</table>
 
 ---
 
 ## Troubleshooting
 
 ### "Docker is not running"
-Make sure Docker Desktop is open and running before you execute any commands.
+Make sure Docker Desktop is open and running before you run the installer.
 
 ### "Port 3000 is already in use"
-Another application is using port 3000. Either stop that application, or edit the `docker-compose.yml` file and change `"3000:3000"` to something like `"3001:3000"`, then access the app at `http://localhost:3001`.
+Another application is using port 3000. Stop that application and try again.
 
 ### "Permission denied" errors
-- On **Mac/Linux**, you may need to run the commands with `sudo` in front (e.g., `sudo docker compose up -d`).
-- On **Windows**, make sure you are running the terminal as Administrator.
+- **macOS / Linux:** Try running the command with `sudo` in front.
+- **Windows:** Right-click PowerShell and select "Run as Administrator".
 
 ### The page is blank or won't load
-Wait a minute after starting the container — the application may still be initializing. Try refreshing the page.
+Wait about a minute after starting — the application may still be loading. Refresh the page.
 
-### "Invalid token" or GitHub-related errors
-Double-check your `.env` file to make sure the token is correct and there are no extra spaces or characters.
-
----
-
-## Summary of Commands
-
-| Action | Command |
-|---|---|
-| Start Vibe Kanban | `docker compose up -d` |
-| Stop Vibe Kanban | `docker compose down` |
-| Log in to Claude | `docker exec -it viact-vibe-kanban-desktop gosu node claude` |
-| View logs | `docker compose logs -f` |
+### "Invalid token" or GitHub errors
+Run the installer again. It will let you re-enter your GitHub token.
 
 ---
 
-That's it! You're all set to use Vibe Kanban. If you have any questions, feel free to reach out to the team.
+## Quick Reference
+
+| Action | macOS / Linux | Windows (PowerShell) |
+|--------|---------------|----------------------|
+| Install | `curl -fsSL .../install.sh \| bash` | `irm .../install.ps1 \| iex` |
+| Stop | `... \| bash -s -- --stop` | `$env:VK_ACTION="stop"; ...` |
+| Restart | `... \| bash -s -- --restart` | `$env:VK_ACTION="restart"; ...` |
+| Uninstall | `... \| bash -s -- --uninstall` | `$env:VK_ACTION="uninstall"; ...` |
+| Claude Login | `docker exec -it viact-vibe-kanban-desktop gosu node claude` | Same |
+| View Logs | `docker compose logs -f` (in `~/.vibe-kanban`) | Same |
+
+---
+
+<p align="center">
+  <strong>Copyright (c) Daniel Le, Viact Team</strong>
+</p>
